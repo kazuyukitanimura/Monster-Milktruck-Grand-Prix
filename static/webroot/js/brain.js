@@ -1,6 +1,6 @@
 $(function() {
     
-    window.Socket = io.connect('http://localhost:8081');
+    window.Socket = io.connect();
 
     Socket.on('message', function(d) {
         var data = eval('(' + d + ')');
