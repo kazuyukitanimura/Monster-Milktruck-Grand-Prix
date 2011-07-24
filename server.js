@@ -25,25 +25,31 @@ app.listen(8090);
 var io = socketIO.listen(app);
 
 // socket.io, I choose you
+//io.sockets.on('connection', function(socket) {
+//  
+//  // prepare listening socket
+//  var dgram = require('dgram'),
+//    osc_serv = dgram.createSocket('udp4')
+//
+//  // parse the message from Osculator client
+//  // not really doing any determination via OSC spec
+//  // just dumb-parsing the buffer
+//  osc_serv.on('message', function (msg, a) {
+//    var val = osc.decode(msg);
+//    json = JSON.stringify(val);
+//    socket.send(json);
+//  })
+//
+//  // listen for incoming messages from Osculator client
+//  // be sure to set port and IP address to where your
+//  // Osculator client routes OSC messages.
+//  // Don't use default values.
+//  osc_serv.bind(60000, '10.22.35.95')
+//
+//});
 io.sockets.on('connection', function(socket) {
-  
-  // prepare listening socket
-  var dgram = require('dgram'),
-    osc_serv = dgram.createSocket('udp4')
-
-  // parse the message from Osculator client
-  // not really doing any determination via OSC spec
-  // just dumb-parsing the buffer
-  osc_serv.on('message', function (msg, a) {
-    var val = osc.decode(msg);
-    json = JSON.stringify(val);
-    socket.send(json);
-  })
-
-  // listen for incoming messages from Osculator client
-  // be sure to set port and IP address to where your
-  // Osculator client routes OSC messages.
-  // Don't use default values.
-  osc_serv.bind(60000, '10.22.35.95')
-
+  socket.on('control', function(data){
+    socket.json.send(data);
+  });
 });
+

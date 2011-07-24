@@ -2,29 +2,28 @@ $(function() {
     
     window.Socket = io.connect();
 
-    Socket.on('message', function(d) {
-        var data = eval('(' + d + ')');
-        var axis = data[0], val = data[1];
+    Socket.on('message', function(data) {
+        var axisX = data.x;
+        var axisY = data.y;
         // console.log(axis);
         
-        if (axis == "/x") {
-          turnCoefficient = Math.abs(0.5 - val) * 2;
-          if (val < 0.46) {
+        if (axisX>=0) {
+          if (axisX < 0.46) {
             leftButtonDown = true;
             rightButtonDown = false;
-          } else if (val > 0.54) {
+          } else if (axisX > 0.54) {
             leftButtonDown = false;
             rightButtonDown = true;
           } else {
             leftButtonDown = false;
             rightButtonDown = false;
           }
-        } else if (axis == '/y') {
-          accelCoefficient = Math.abs(0.5 - val) * 2;
-          if (val < 0.48) {
+        }
+        if (axisY>=0) {
+          if (axisY < 0.48) {
             gasButtonDown = false;
             reverseButtonDown = true;
-          } else if (val > 0.52) {
+          } else if (axisY > 0.52) {
             gasButtonDown = true;
             reverseButtonDown = false;
           } else {

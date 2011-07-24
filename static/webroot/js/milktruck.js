@@ -154,17 +154,22 @@ function keyDown(event) {
   if (!event) {
     event = window.event;
   }
+  var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
-    leftButtonDown = true;
+    //leftButtonDown = true;
+    socket.json.emit('control', {x: 0});
     event.returnValue = false;
   } else if (event.keyCode == 39) {  // Right.
-    rightButtonDown = true;
+    //rightButtonDown = true;
+    socket.json.emit('control', {x: 1});
     event.returnValue = false;
   } else if (event.keyCode == 38) {  // Up.
-    gasButtonDown = true;
+    //gasButtonDown = true;
+    socket.json.emit('control', {y: 1});
     event.returnValue = false;
   } else if (event.keyCode == 40) {  // Down.
-    reverseButtonDown = true;
+    //reverseButtonDown = true;
+    socket.json.emit('control', {y: 0});
     event.returnValue = false;
   } else {
     return true;
@@ -176,17 +181,22 @@ function keyUp(event) {
   if (!event) {
     event = window.event;
   }
+  var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
-    leftButtonDown = false;
+    //leftButtonDown = false;
+    socket.json.emit('control', {x: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 39) {  // Right.
-    rightButtonDown = false;
+    //rightButtonDown = false;
+    socket.json.emit('control', {x: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 38) {  // Up.
-    gasButtonDown = false;
+    //gasButtonDown = false;
+    socket.json.emit('control', {y: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 40) {  // Down.
-    reverseButtonDown = false;
+    //reverseButtonDown = false;
+    socket.json.emit('control', {y: 0.5});
     event.returnValue = false;
   }
   return false;
@@ -266,10 +276,10 @@ Truck.prototype.tick = function() {
       turnSpeed = TURN_SPEED_MIN;
     }
     if (leftButtonDown) {
-      steerAngle = turnSpeed * dt * Math.PI * turnCoefficient / 180.0;
+      steerAngle = turnSpeed * dt * Math.PI / 180.0;
     }
     if (rightButtonDown) {
-      steerAngle = -turnSpeed * dt * Math.PI * turnCoefficient / 180.0;
+      steerAngle = -turnSpeed * dt * Math.PI / 180.0;
     }
   }
   
@@ -301,10 +311,10 @@ Truck.prototype.tick = function() {
     forwardSpeed = V3.dot(dir, me.vel);
     if (gasButtonDown) {
       // Accelerate forwards.
-      me.vel = V3.add(me.vel, V3.scale(dir, ACCEL * dt * accelCoefficient));
+      me.vel = V3.add(me.vel, V3.scale(dir, ACCEL * dt));
     } else if (reverseButtonDown) {
       if (forwardSpeed > -MAX_REVERSE_SPEED)
-        me.vel = V3.add(me.vel, V3.scale(dir, -DECEL * dt * accelCoefficient));
+        me.vel = V3.add(me.vel, V3.scale(dir, -DECEL * dt));
     }
   }
 
