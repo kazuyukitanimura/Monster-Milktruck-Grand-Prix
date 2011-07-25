@@ -22,9 +22,10 @@ window.truck = null;
 // Pull the Milktruck model from 3D Warehouse.
 var PAGE_PATH = document.location.href.replace(/\/[^\/]+$/, '/');
 var MODEL_URL =
-//  'http://sketchup.google.com/3dwarehouse/download?'
-//  + 'mid=3c9a1cac8c73c61b6284d71745f1efa9&rtyp=zip&'
-//  + 'fn=milktruck&ctyp=milktruck';
+  'http://sketchup.google.com/3dwarehouse/download?'
+  + 'mid=3c9a1cac8c73c61b6284d71745f1efa9&rtyp=zip&'
+  + 'fn=milktruck&ctyp=milktruck';
+var MODEL_URL2 =
     'http://sketchup.google.com/3dwarehouse/download?mid=3d64ec9ab5ebe37020fc0d1f64d8ea9c&rtyp=zip&fn=Man+Riding+Segway+i2&ctyp=other&prevstart=0&ts=1202486001000';
 var INIT_LOC = {
   lat: 37.423501,
@@ -39,12 +40,12 @@ var BALLOON_FG = '#000000';
 var BALLOON_BG = '#FFFFFF';
 
 var GRAVITY = 9.8;
-var CAM_HEIGHT = 6;
-var TRAILING_DISTANCE = 15;
+var CAM_HEIGHT = 10;
+var TRAILING_DISTANCE = 50;
 
-var ACCEL = 10.0;
-var DECEL = 20.0;
-var MAX_REVERSE_SPEED = 10.0;
+var ACCEL = 50.0;
+var DECEL = 80.0;
+var MAX_REVERSE_SPEED = 40.0;
 
 var STEER_ROLL = -1.0;
 var ROLL_SPRING = 0.5;
@@ -156,19 +157,19 @@ function keyDown(event) {
   }
   var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
-    //leftButtonDown = true;
+    leftButtonDown = true;
     socket.json.emit('control', {x: 0});
     event.returnValue = false;
   } else if (event.keyCode == 39) {  // Right.
-    //rightButtonDown = true;
+    rightButtonDown = true;
     socket.json.emit('control', {x: 1});
     event.returnValue = false;
   } else if (event.keyCode == 38) {  // Up.
-    //gasButtonDown = true;
+    gasButtonDown = true;
     socket.json.emit('control', {y: 1});
     event.returnValue = false;
   } else if (event.keyCode == 40) {  // Down.
-    //reverseButtonDown = true;
+    reverseButtonDown = true;
     socket.json.emit('control', {y: 0});
     event.returnValue = false;
   } else {
@@ -183,19 +184,19 @@ function keyUp(event) {
   }
   var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
-    //leftButtonDown = false;
+    leftButtonDown = false;
     socket.json.emit('control', {x: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 39) {  // Right.
-    //rightButtonDown = false;
+    rightButtonDown = false;
     socket.json.emit('control', {x: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 38) {  // Up.
-    //gasButtonDown = false;
+    gasButtonDown = false;
     socket.json.emit('control', {y: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 40) {  // Down.
-    //reverseButtonDown = false;
+    reverseButtonDown = false;
     socket.json.emit('control', {y: 0.5});
     event.returnValue = false;
   }

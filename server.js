@@ -49,7 +49,7 @@ var io = socketIO.listen(app);
 //});
 io.sockets.on('connection', function(socket) {
   socket.on('control', function(data){
-    socket.json.send(data);
+    socket.broadcast.json.send(data);
   });
 });
 
