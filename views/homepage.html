@@ -111,19 +111,14 @@
 	</script> 
 	<script>
 	var allUserInfo;
-		function load() {
-			allUserInfo = {
-				id: null,
-				lat: 0,
-				long: 0
-			};
-			
+	var raceID;
+		function load() {			
 			var username = document.getElementById('name');
 			var button = document.getElementById('submit');
 			button.addEventListener('click', function(evt) {
 				evt.preventDefault();
 				var data = {
-					id: allUserInfo.id,
+					userID: allUserInfo.userID,
 					name: username.value,
 					modelURL: "http://sketchup.google.com/3dwarehouse/download?mid=2258ffbe06c20eadb6fa99b092209800&rtyp=s7&fn=mk&ctyp=other&prevstart=0&ts=1299386395000"
 				};

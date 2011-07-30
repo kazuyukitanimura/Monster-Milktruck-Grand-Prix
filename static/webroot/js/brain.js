@@ -3,20 +3,20 @@ $(function() {
     window.Socket = io.connect();
     
     Socket.on('uuid', function(data) {
-    	window.allUserInfo.id = data.userID;
+    	window.allUserInfo.userID = data.userID;
     });
 	
 	Socket.on('control', function(data) {
 		if (isControlled && data.userID == window.controllingUser) {
 			truck.teleportTo(data.lat, data.lon);
 		}
-		
-		Socket.json.emit('location', {
-			raceID: raceID,
-			userID: userid,
-			lat: lat,
-			lon: lon
-		});
+	});
+	
+	Socket.json.emit('location', {
+		raceID: window.raceID,
+		userID: window.allUserInfo.userID,
+		lat: window.allUserInfo.lat,
+		lon: window.allUserInfo.lon
 	});
     
     Socket.on('startRace', function(data) {
@@ -54,19 +54,36 @@ $(function() {
     			init();
     			var currentNum;
 				var usersLength = data.users.length - 1;
+				var usersList = '';
+				console.log ('local: ' + window.allUserInfo.userID);
 				for (x = 0; x < data.users.length; x++) {
-				    if(allUserInfo.id == data.users[x].userid){
-				        currentNum = x;
-				    }
+					console.log ('remote: ' + data.users[x].userID);
+					if(window.allUserInfo.userID == data.users[x].userID) {
+						currentNum = x;
+					}
+					usersList += '\n ' + data.users[x].name;
 				}
+				console.log("You are user number: " + currentNum);
     			getUserPosition(currentNum); 
     			window.raceID = data.raceID;
     			
-    			var isControlled = confirm('Want to be controlled? You are user ' + window.allUserInfo.id + '.');
+    			var isControlled = confirm('Want to be controlled? Your username: ' + data.users[currentNum].name);
+    			
     			if (isControlled) {
-    			    window.controllingUser = prompt('Which user would you like to control you? 0 through ' + usersLength + ':', '');
-    			    while (window.controllingUser == currentNum) {
-    			    	window.controllingUser = prompt('No! 0 through ' + usersLength + ':', '');
+    			    window.controllingUser = prompt('Which user would you like to control you? Current users are: ' + usersList);
+    			    var matched = false;
+    			    for (i = 0; i < data.users.length; i++) {
+    			    	if (data.users[i].name == window.controllingUser) {
+    			    		matched = true;
+    			    	}
+    			    }
+    			    while (window.controllingUser == data.users[currentNum].name || !matched) {
+    			    	window.controllingUser = prompt('Which user would you like to control you? Current users are: ' + usersList);
+    			    	for (i = 0; i < data.users.length; i++) {
+    			    		if (data.users[i].name == window.controllingUser) {
+    			    			matched = true;
+    			    		}
+    			    	}
     			    }
     			    document.body.removeEventListener('keydown', keyDownListener, false);
     			    document.body.removeEventListener('keyup', keyUpListener, false);
