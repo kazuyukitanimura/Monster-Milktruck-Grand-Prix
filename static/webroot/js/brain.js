@@ -51,7 +51,7 @@ $(function() {
 	
 	Socket.on('control', function(data) {
 		if (isControlled && data.userID == window.controllingUser) {
-			truck.teleportTo(data.lat, data.long);
+			truck.teleportTo(data.lat, data.lon);
 		}
 		
 		Socket.json.emit('location', {
