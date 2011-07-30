@@ -88,9 +88,11 @@ io.sockets.on('connection', function(socket) {
   });
   socket.on('location', function(data){
     var raceID = data.raceID;
-    var raceObj = gRaceArray[raceID];
-    for(var i=raceObj.length; i--;){
-      io.sockets.sockets[raceObj[i]].json.emit('control', data);
+    if(raceID){
+      var raceObj = gRaceArray[raceID];
+      for(var i=raceObj.length; i--;){
+        io.sockets.sockets[raceObj[i]].json.emit('control', data);
+      }
     }
   });
   
