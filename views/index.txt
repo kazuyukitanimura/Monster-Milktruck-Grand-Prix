@@ -1,0 +1,33 @@
+  <center> 
+    <div class="title"> 
+      <center> 
+        <i>MONSTER MILKTRUCK GRAND PRIX!</i> 
+      </center> 
+    </div> 
+
+    <div id='map3d'></div> 
+
+    <table> 
+      <tr> 
+        <td> 
+          To drive: use the buttons, or keyboard arrows (with focus on page).
+
+          <div> 
+            <form name='searchform' id='searchform' action='javascript:submitLocation();void(0);'> 
+              <input type=text size=60 id='address' value='(enter a location to go there)'></input> 
+              <input type=submit value='Teleport!'> 
+            </form> 
+
+            Presets:
+            <input type=button value="Th' Plex" onclick="truck.teleportTo(37.423501,-122.086744,90);"> 
+            <input type=button value="San Francisco" onclick="doGeocode('San Francisco');"> 
+            <input type=button value="Whistler" onclick="truck.teleportTo(50.085734,-122.855824,220);"> 
+            <input type=button value="Pismo" onclick="truck.teleportTo(35.040675,-120.629513,170);"> 
+            <input type=button value="Tokyo" onclick="truck.teleportTo(35.668607,139.822026,180);"> 
+            <input type=button value="Everest" onclick="truck.teleportTo(27.991283,86.924340,70);"> 
+          </div> 
+
+        </td> 
+      </tr> 
+    </table> 
+  </center> 

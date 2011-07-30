@@ -15,8 +15,15 @@ app.configure(function() {
 
 app.get('/', function(req, res, next) {
   res.writeHead(200, { 'Content-Type': 'text/html' });
-  fs.readFile('./views/index.html', 'utf8', function (err, html) {
+  fs.readFile('./views/homepage.html', 'utf8', function (err, html) {
     res.end(html);
+  });
+});
+
+app.get('/index.txt', function(req, res, next) {
+  res.writeHead(200, { 'Content-Type': 'text' });
+  fs.readFile('./views/index.txt', 'utf8', function (err, text) {
+    res.end(text);
   });
 });
 
@@ -86,5 +93,5 @@ io.sockets.on('connection', function(socket) {
       socket.sockets.sockets[raceObj[i]].json.emit('control', data);
     }
   });
+  
 });
-

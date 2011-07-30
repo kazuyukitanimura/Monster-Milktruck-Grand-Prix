@@ -4,7 +4,35 @@ $(function() {
     
     Socket.on('uuid', function(data) {
     	window.allUserInfo.id = data.id;
-    	console.log(window.allUserInfo.id);
+    });
+    
+    Socket.on('startRace', function(data) {
+    	var xhr = new XMLHttpRequest();
+    	xhr.onreadystatechange = function() {
+    		if (xhr.readyState == 4) {
+    			var data = xhr.responseText;
+    			console.log(data);
+    			
+    			document.body.innerHTML = data;
+    			
+    			init();
+    		}
+    	};
+    	
+		xhr.open('GET', "index.txt", true); 
+		xhr.send(null); 
+		
+		document.body.addEventListener('keydown', function(event) {
+			return keyDown(event);
+		}, false);
+		
+		document.body.addEventListener('keyup', function(event) {
+			return keyUp(event);
+		}, false);
+		
+		document.body.addEventListener('unload', function() {
+			GUnload();
+		}, false);
     });
 
     Socket.on('message', function(data) {
@@ -36,10 +64,13 @@ $(function() {
             reverseButtonDown = false;
           }
         }
-        
     });
     
     // new Hand({id: 'left'});
     // new Hand({id: 'right'});
     
 });
+
+function join(data) {
+	Socket.emit('join', data);
+};
