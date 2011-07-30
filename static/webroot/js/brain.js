@@ -30,14 +30,14 @@ $(function() {
     });
     
     Socket.on('newClient', function(data) {
-    	for (var i = 0; i < data[i].length; i++) {
-	    	var uid = data[i].name;
-	    	var li = document.createElement('li');
-	    	li.innerHTML = uid;
-	    	
-	    	if (document.getElementById('list')) {
-	    		document.getElementById('list').appendChild(li);
-	    	}
+    	if (document.getElementById('list')) {
+    		document.getElementById('list').innerHTML = '';
+	    	for (var i = 0; i < data.names.length; i++) {
+		    	var uid = data.names[i];
+		    	var li = document.createElement('li');
+		    	li.innerHTML = uid;
+		    	document.getElementById('list').appendChild(li);		    	
+		    }
 	    }
     });
     
