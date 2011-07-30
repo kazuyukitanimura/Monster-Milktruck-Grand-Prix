@@ -66,7 +66,7 @@ Enemy.prototype.finishInit = function(kml) {
 
   google.earth.addEventListener(ge, "frameend", function() { me.tick(); });
 
-  me.cameraCut();
+  //me.cameraCut();
 
   // Make sure keyboard focus starts out on the page.
   ge.getWindow().blur();
@@ -80,9 +80,22 @@ Enemy.prototype.finishInit = function(kml) {
 
   Socket.on('control', function(data) {
       //console.log('lat:'+data.lat+', lon:'+data.lon+', alt:'+data.alt);
-    me.model.getLocation().setLatLngAlt(data.lat, data.lon, data.alt);
+    //me.model.getLocation().setLatLngAlt(data.lat, data.lon, data.alt);
   });
 }
+//Enemy.prototype.cameraCut = function() {
+//  var me = this;
+//  var lo = me.model.getLocation();
+//  var la = ge.createLookAt('');
+//  la.set(lo.getLatitude(), lo.getLongitude(),
+//         10 /* altitude */,
+//         ge.ALTITUDE_RELATIVE_TO_SEA_FLOOR,
+//         fixAngle(180 + me.model.getOrientation().getHeading() + 45),
+//         80, /* tilt */
+//         50 /* range */         
+//         );
+//  ge.getView().setAbstractView(la);
+//};
 
 //Enemy.prototype.tick = function(){
     //Socket.on('control', function(data) {
