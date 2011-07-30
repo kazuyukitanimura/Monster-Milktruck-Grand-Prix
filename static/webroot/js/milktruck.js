@@ -30,7 +30,7 @@ var MODEL_URL2 =
 var INIT_LOC = {
   lat: 37.423501,
   lon: -122.086744,
-  heading: 120
+  heading: 90
 }; // googleplex
 
 var PREVENT_START_AIRBORNE = false;

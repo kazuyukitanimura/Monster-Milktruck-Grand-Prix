@@ -59,7 +59,7 @@ gUserIDCounter = 0;
 gRaceIDCounter = 0;
 gRaceArray = [[]]; // array of array of sid
 gUserTable = {};
-INIT_DEPART = {lat: 37.423378, lon: -122.072825, name: "LinkedIn"};
+INIT_DEPART = {lat: 37.425389, lon: -122.079134, name: "LinkedIn"};
 INIT_DESTINATION = {lat: 37.331641, lon: -122.030082, name: "Apple"};
 io.sockets.on('connection', function(socket) {
   socket.json.emit('uuid', {userID:gUserIDCounter++});
