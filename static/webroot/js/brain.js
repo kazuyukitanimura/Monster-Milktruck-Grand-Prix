@@ -31,17 +31,24 @@ $(function() {
 		}
 		
 		function getCurrentNum() {
+			var usersLength = data.users.length - 1;
 		    for (x = 0; x < data.users.length; x++) {
 		        if(allUserInfo.userid == data.users[x].userid){
 		            return x;
 		        }
 		    }
+		    
+		    window.controllingUser = prompt('Which user would you like to control? 0 through ' + usersLength + ':', '');
 		}
 		
 		truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
 	}
 	
 	Socket.on('control', function(data) {
+		if (data.userID == window.controllingUser) {
+			truck.teleportTo(data.lat, data.long);
+		}
+		
 		Socket.json.emit('location', {
 			raceID: raceID,
 			userID: userid,

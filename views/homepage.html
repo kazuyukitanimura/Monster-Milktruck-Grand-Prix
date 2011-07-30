@@ -101,9 +101,9 @@
 	function doGeocode(address) {
 	geocoder.getLatLng(address, function(point) {
 	  if (point) {
-	    if (ge != null && truck != null) {
-	      truck.teleportTo(point.y, point.x);
-	    }
+		    if (ge != null && truck != null) {
+				truck.teleportTo(point.y, point.x);
+		    }
 	  }
 	});
 	}
