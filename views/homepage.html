@@ -97,8 +97,8 @@
         lineString.setAltitudeMode(ge.ALTITUDE_RELATIVE_TO_GROUND);
         
         //add linestring points
-        lineString.getCoordinates().pushLatLngAlt(window.allUserInfo.depart.lat,window.allUserInfo.depart.lon);
-        lineString.getCoordinates().pushLatLngAlt(window.allUserInfo.arrive.lat,window.allUserInfo.arrive.lon);
+        lineString.getCoordinates().pushLatLngAlt(window.allUserInfo.depart.lat,window.allUserInfo.depart.lon, 50);
+        lineString.getCoordinates().pushLatLngAlt(window.allUserInfo.arrive.lat,window.allUserInfo.arrive.lon, 50);
         
         lineStringPlacemark.setStyleSelector(ge.createStyle(''));
          var lineStyle = lineStringPlacemark.getStyleSelector().getLineStyle();
