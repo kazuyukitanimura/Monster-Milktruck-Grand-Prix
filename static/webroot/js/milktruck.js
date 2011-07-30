@@ -495,6 +495,8 @@ var FAST_MESSAGES = [
     "Whoah there, cowboy!",
     "Wheeeeeeeeee!",
     "<font size=+5 color=#8080FF>Creamy!</font>",
+    "<font size=+5 color=#8080FF>LinkedIn!</font>",
+    "<font size=+5 color=#8080FF>Here we go!</font>",
     "Hey, we're hauling glass bottles here!"
                      ];
 Truck.prototype.showFastPopup = function() {
