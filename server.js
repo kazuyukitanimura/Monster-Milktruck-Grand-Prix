@@ -81,7 +81,7 @@ io.sockets.on('connection', function(socket) {
         users.push(gUserTable[raceObj[i]]);
       }
       for(var i=raceObj.length; i--;){
-        socket.sockets.sockets[raceObj[i]].json.emit('startRace', {raceID: raceID, depart: depart, destination: destination, users: users});
+        io.sockets.sockets[raceObj[i]].json.emit('startRace', {raceID: raceID, depart: depart, destination: destination, users: users});
       }
       gRaceArray[++gRaceIDCounter] = [];
     }
@@ -90,7 +90,7 @@ io.sockets.on('connection', function(socket) {
     var raceID = data.raceID;
     var raceObj = gRaceArray[raceID];
     for(var i=raceObj.length; i--;){
-      socket.sockets.sockets[raceObj[i]].json.emit('control', data);
+      io.sockets.sockets[raceObj[i]].json.emit('control', data);
     }
   });
   
