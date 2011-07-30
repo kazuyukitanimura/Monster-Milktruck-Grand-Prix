@@ -57,7 +57,7 @@ var io = socketIO.listen(app);
 MAXRACEUSER = 4;
 gUserIDCounter = 0;
 gRaceIDCounter = 0;
-gRaceArray = []; // array of array of sid
+gRaceArray = [[]]; // array of array of sid
 gUserTable = {};
 io.sockets.on('connection', function(socket) {
   socket.json.emit('uuid', {userID:gUserIDCounter++});
@@ -83,7 +83,7 @@ io.sockets.on('connection', function(socket) {
       for(var i=raceObj.length; i--;){
         socket.sockets.sockets[raceObj[i]].json.emit('startRace', {raceID: raceID, depart: depart, destination: destination, users: users});
       }
-      gRaceIDCounter++;
+      gRaceArray[++gRaceIDCounter] = [];
     }
   });
   socket.on('location', function(data){
