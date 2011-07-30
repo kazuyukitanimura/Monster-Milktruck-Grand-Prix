@@ -29,6 +29,16 @@ $(function() {
       }
     });
     
+    Socket.on('newClient', function(data) {
+    	var uid = data.name;
+    	var li = document.createElement('li');
+    	li.innerHTML = uid;
+    	
+    	if (document.getElementById('list')) {
+    		document.getElementById('list').appendChild(li);
+    	}
+    ]);
+    
     Socket.on('startRace', function(data) {
     	function getUserPosition(pos){
     	    window.allUserInfo.lon = data.depart.lon;
