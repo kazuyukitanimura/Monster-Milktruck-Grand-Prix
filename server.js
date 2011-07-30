@@ -49,7 +49,7 @@ var io = socketIO.listen(app);
 //});
 globalIDCounter = 0;
 io.sockets.on('connection', function(socket) {
-  socket.json.emit('uuid', {id:globalIDCounter++});
+  socket.json.emit('uuid', {userID:globalIDCounter++});
   socket.on('control', function(data){
     socket.broadcast.json.send(data);
   });
