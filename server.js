@@ -102,7 +102,7 @@ io.sockets.on('connection', function(socket) {
           io.sockets.sockets[tosid].json.emit('control', data);
         }
       }
-      if(distance < 0.01){
+      if(distance < 0.0001){
         for(var i=raceObj.length; i--;){
           var tosid = raceObj[i];
           if(sid===tosid){

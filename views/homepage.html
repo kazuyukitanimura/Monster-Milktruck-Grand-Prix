@@ -97,8 +97,10 @@
         lineString.setAltitudeMode(ge.ALTITUDE_RELATIVE_TO_GROUND);
         
         //add linestring points
-        lineString.getCoordinates().pushLatLngAlt(window.allUserInfo.depart.lat,window.allUserInfo.depart.lon, 50);
-        lineString.getCoordinates().pushLatLngAlt(window.allUserInfo.arrive.lat,window.allUserInfo.arrive.lon, 50);
+        var INIT_DEPART = {lat: 37.423378, lon: -122.072825, name: "LinkedIn"};
+        var INIT_DESTINATION = {lat: 37.331641, lon: -122.030082, name: "Apple"};
+        lineString.getCoordinates().pushLatLngAlt(INIT_DEPART.lat, INIT_DEPART.lon, 50);
+        lineString.getCoordinates().pushLatLngAlt(INIT_DESTINATION.lat, INIT_DESTINATION.lon, 50);
         
         lineStringPlacemark.setStyleSelector(ge.createStyle(''));
          var lineStyle = lineStringPlacemark.getStyleSelector().getLineStyle();
