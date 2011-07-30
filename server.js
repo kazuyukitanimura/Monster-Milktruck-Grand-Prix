@@ -88,7 +88,7 @@ io.sockets.on('connection', function(socket) {
       gRaceArray[++gRaceIDCounter] = [];
     }else{
       for(var i=raceObj.length; i--;){
-        io.sockets.sockets[raceObj[i]].json.emit('newClient', {name: data.name});
+        io.sockets.sockets[raceObj[i]].json.emit('newClient', {name: gUserTable[raceObj[i]].name});
       }
     }
   });
