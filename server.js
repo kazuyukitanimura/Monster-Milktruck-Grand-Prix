@@ -87,9 +87,11 @@ io.sockets.on('connection', function(socket) {
       }
       gRaceArray[++gRaceIDCounter] = [];
     }else{
+      var newClients = [];
       for(var i=raceObj.length; i--;){
-        io.sockets.sockets[raceObj[i]].json.emit('newClient', {name: gUserTable[raceObj[i]].name});
+        newClients.push(gUserTable[raceObj[i]].name);
       }
+      io.sockets.sockets[raceObj[i]].json.emit('newClient', newClients):
     }
   });
   socket.on('location', function(data){
