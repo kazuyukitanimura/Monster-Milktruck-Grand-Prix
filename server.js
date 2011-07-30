@@ -66,8 +66,8 @@ io.sockets.on('connection', function(socket) {
     raceObj.push(sid);
     gRaceArray[gRaceIDCounter] = raceObj;
     if(raceObj.length === MAXRACEUSER){
-      var depart = {lat: 37.423191, lon: -122.070787, name"LinkedIn"};
-      var destination = {lat: 37.735189, lon: -122.505498, name"San Francisco Zoo"};
+      var depart = {lat: 37.423191, lon: -122.070787, name: "LinkedIn"};
+      var destination = {lat: 37.735189, lon: -122.505498, name: "San Francisco Zoo"};
       var raceID = gRaceIDCounter;
       var users = [];
       for(var i=raceObj.length; i--;){
