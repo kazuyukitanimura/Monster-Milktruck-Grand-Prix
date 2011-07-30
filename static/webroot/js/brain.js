@@ -30,13 +30,15 @@ $(function() {
     });
     
     Socket.on('newClient', function(data) {
-    	var uid = data.name;
-    	var li = document.createElement('li');
-    	li.innerHTML = uid;
-    	
-    	if (document.getElementById('list')) {
-    		document.getElementById('list').appendChild(li);
-    	}
+    	for (var i = 0; i < data[i].length; i++) {
+	    	var uid = data[i].name;
+	    	var li = document.createElement('li');
+	    	li.innerHTML = uid;
+	    	
+	    	if (document.getElementById('list')) {
+	    		document.getElementById('list').appendChild(li);
+	    	}
+	    }
     });
     
     Socket.on('startRace', function(data) {
