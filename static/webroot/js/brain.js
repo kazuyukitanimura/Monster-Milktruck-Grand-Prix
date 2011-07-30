@@ -37,7 +37,7 @@ $(function() {
     	if (document.getElementById('list')) {
     		document.getElementById('list').appendChild(li);
     	}
-    ]);
+    });
     
     Socket.on('startRace', function(data) {
     	function getUserPosition(pos){
