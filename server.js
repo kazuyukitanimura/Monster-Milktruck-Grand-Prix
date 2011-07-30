@@ -54,7 +54,7 @@ var io = socketIO.listen(app);
 //  osc_serv.bind(60000, '10.22.35.95')
 //
 //});
-MAXRACEUSER = 1;
+MAXRACEUSER = 4;
 gUserIDCounter = 0;
 gRaceIDCounter = 0;
 gRaceArray = [[]]; // array of array of sid
