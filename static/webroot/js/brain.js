@@ -38,14 +38,19 @@ $(function() {
 		        }
 		    }
 		    
-		    window.controllingUser = prompt('Which user would you like to control? 0 through ' + usersLength + ':', '');
+		    var isControlled = prompt('Want to be controlled?', '');
+		    if (isControlled) {
+			    window.controllingUser = prompt('Which user would you like to control? 0 through ' + usersLength + ':', '');
+			    document.body.removeEventListener('keydown', keyDownListener, false);
+			    document.body.removeEventListener('keyup', keyUpListener, false);
+			}
 		}
 		
 		truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
 	}
 	
 	Socket.on('control', function(data) {
-		if (data.userID == window.controllingUser) {
+		if (isControlled && data.userID == window.controllingUser) {
 			truck.teleportTo(data.lat, data.long);
 		}
 		
@@ -71,18 +76,21 @@ $(function() {
 		xhr.open('GET', "index.txt", true); 
 		xhr.send(null); 
 		
-		document.body.addEventListener('keydown', function(event) {
-			return keyDown(event);
-		}, false);
-		
-		document.body.addEventListener('keyup', function(event) {
-			return keyUp(event);
-		}, false);
+		document.body.addEventListener('keydown', keyDownListener, false);
+		document.body.addEventListener('keyup', keyUpListener, false);
 		
 		document.body.addEventListener('unload', function() {
 			GUnload();
 		}, false);
     });
+    
+    function keyDownListener(event) {
+		return keyDown(event);
+    };
+    
+    function keyUpListener(event) {
+    	return keyUp(event);
+    };
 
     Socket.on('control', function(data) {
         var axisX = data.x;
