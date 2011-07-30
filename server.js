@@ -91,7 +91,9 @@ io.sockets.on('connection', function(socket) {
       for(var i=raceObj.length; i--;){
         newClients.push(gUserTable[raceObj[i]].name);
       }
-      io.sockets.sockets[raceObj[i]].json.emit('newClient', {names:newClients});
+      for(var i=raceObj.length; i--;){
+        io.sockets.sockets[raceObj[i]].json.emit('newClient', {names:newClients});
+      }
     }
   });
   socket.on('location', function(data){
