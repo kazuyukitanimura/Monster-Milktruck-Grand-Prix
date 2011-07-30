@@ -126,6 +126,7 @@
 					name: username.value,
 					modelURL: "http://sketchup.google.com/3dwarehouse/download?mid=2258ffbe06c20eadb6fa99b092209800&rtyp=s7&fn=mk&ctyp=other&prevstart=0&ts=1299386395000"
 				};
+                                $('#waitMessage').show();
 				
 				join(data);
 				this.setAttribute('disabled', 'true');
@@ -138,8 +139,10 @@
 
 <body>
 	<div id="wrap">
+	        <h1>Monster Milktruck GRAND PRIX!</h1> 
 		<input type="text" placeholder="Enter your name" id="name">
 		<button id="submit">Go!</button>
+                <div id="waitMessage", style="display:none;font-size:40px;"><p>Please wait for other players</p></div>
 	</div>
 </body>
 
