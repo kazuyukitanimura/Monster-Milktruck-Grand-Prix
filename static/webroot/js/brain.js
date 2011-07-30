@@ -9,6 +9,7 @@ $(function() {
 function startRace(data) {
 	var currentNum = getCurrentNum();
 	getUserPosition(currentNum); 
+	window.raceID = data.raceID;
 	        
 	function getUserPosition(pos){
 	    allUserInfo.lon = data.depart.lon;
@@ -104,5 +105,5 @@ function startRace(data) {
 });
 
 function join(data) {
-	Socket.emit('join', data);
+	Socket.json.emit('join', data);
 };
