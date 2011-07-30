@@ -1,7 +1,8 @@
+<div class="dark">
     <div id='map3d'></div> 
 
 <div id="top">
-	<h1>Milk Truck Kart Demo</h1>
+	<h1 id="h">Milk Truck Kart Demo</h1>
 </div>
 	<div id='win' style="display:none; color:red; position:absolute; top: 50%; left:50%;font-size:40px;">
 	<h1>You Won!</h1>
@@ -26,5 +27,6 @@
 		<input type=button value="Tokyo" onclick="truck.teleportTo(35.668607,139.822026,180);"> 
 		<input type=button value="Everest" onclick="truck.teleportTo(27.991283,86.924340,70);"> 
 	</div> 
+</div>
 </div>
 </div>
