@@ -20,6 +20,9 @@ $(function() {
 	//	lat: window.allUserInfo.lat,
 	//	lon: window.allUserInfo.lon
 	//});
+    Socket.on('endRace',function(data){
+      console.log(data);
+    });
     
     Socket.on('startRace', function(data) {
     	function getUserPosition(pos){

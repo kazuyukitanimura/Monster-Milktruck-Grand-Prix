@@ -59,6 +59,8 @@ gUserIDCounter = 0;
 gRaceIDCounter = 0;
 gRaceArray = [[]]; // array of array of sid
 gUserTable = {};
+INIT_DEPART = {lat: 37.423378, lon: -122.072825, name: "LinkedIn"};
+INIT_DESTINATION = {lat: 37.735189, lon: -122.505498, name: "San Francisco Zoo"};
 io.sockets.on('connection', function(socket) {
   socket.json.emit('uuid', {userID:gUserIDCounter++});
 
@@ -73,8 +75,8 @@ io.sockets.on('connection', function(socket) {
     raceObj.push(sid);
     gRaceArray[gRaceIDCounter] = raceObj;
     if(raceObj.length === MAXRACEUSER){
-      var depart = {lat: 37.423378, lon: -122.072825, name: "LinkedIn"};
-      var destination = {lat: 37.735189, lon: -122.505498, name: "San Francisco Zoo"};
+      var depart = INIT_DEPART;
+      var destination = INIT_DESTINATION;
       var raceID = gRaceIDCounter;
       var users = [];
       for(var i=raceObj.length; i--;){
@@ -88,10 +90,18 @@ io.sockets.on('connection', function(socket) {
   });
   socket.on('location', function(data){
     var raceID = data.raceID;
+    var latD = data.lat - INIT_DESTINATION.lat;
+    var lonD = data.lon - INIT_DESTINATION.lon;
+    var distance = latD*latD + lonD*lonD
     if(raceID>=0){
       var raceObj = gRaceArray[raceID];
       for(var i=raceObj.length; i--;){
         io.sockets.sockets[raceObj[i]].json.emit('control', data);
+      }
+      if(distance < 0.01){
+        for(var i=raceObj.length; i--;){
+          io.sockets.sockets[raceObj[i]].json.emit('endRace', {raceID:raceID, result:[]});
+        }
       }
     }
   });
