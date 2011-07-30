@@ -1,10 +1,3 @@
-  <center> 
-    <div class="title"> 
-      <center> 
-        <i>MONSTER MILKTRUCK GRAND PRIX!</i> 
-      </center> 
-    </div> 
-
     <div id='map3d'></div> 
 
     <table> 
@@ -36,4 +29,3 @@
 <div id='lose' style="display:none; color:blue; position:absolute; top: 50%; left:50%;font-size:40px;">
 <h1>You Lost!</h1>
 </div>
-  </center> 

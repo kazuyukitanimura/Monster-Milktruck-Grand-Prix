@@ -84,31 +84,6 @@
 	enemy4 = new Enemy();
 	
 	keyboardFocusHack(ge);
-    
-        //create placemark
-        var lineStringPlacemark = ge.createPlacemark('');
-        
-        //create linestring
-        var lineString = ge.createLineString('');
-        lineStringPlacemark.setGeometry(lineString);
-        //lineString.setExtrude(true);
-        lineString.setTessellate(true);
-        lineString.setAltitudeMode(ge.ALTITUDE_RELATIVE_TO_GROUND);
-        
-        //add linestring points
-        var INIT_DEPART = {lat: 37.423378, lon: -122.072825, name: "LinkedIn"};
-        var INIT_DESTINATION = {lat: 37.331641, lon: -122.030082, name: "Apple"};
-        lineString.getCoordinates().pushLatLngAlt(INIT_DEPART.lat, INIT_DEPART.lon, 50);
-        lineString.getCoordinates().pushLatLngAlt(INIT_DESTINATION.lat, INIT_DESTINATION.lon, 50);
-        
-        lineStringPlacemark.setStyleSelector(ge.createStyle(''));
-         var lineStyle = lineStringPlacemark.getStyleSelector().getLineStyle();
-         lineStyle.setWidth(5);
-         lineStyle.getColor().set('9900ffff'); 
-        
-        //add to earth
-        ge.getFeatures().appendChild(lineStringPlacemark);
-    
 	}
 	
 	function failureCallback(err) {
@@ -125,7 +100,7 @@
 	function submitLocation() {
 	doGeocode(el('address').value);
 	}
-    
+	
 	function doGeocode(address) {
 	geocoder.getLatLng(address, function(point) {
 	  if (point) {
@@ -150,7 +125,6 @@
 					name: username.value,
 					modelURL: "http://sketchup.google.com/3dwarehouse/download?mid=2258ffbe06c20eadb6fa99b092209800&rtyp=s7&fn=mk&ctyp=other&prevstart=0&ts=1299386395000"
 				};
-                                $('#waitMessage').show();
 				
 				spinner.className = 'show';
 				
@@ -164,29 +138,35 @@
 </head>
 
 <body>
-	<div id="wrap">
-		<div id="card">
-			<div id="playerbox">
-				<h3>Current Players</h3>
-				<ul id="list">
-					<li>Name</li>
-					<li>Other Name</li>
-					<li>Name name</li>
-					<li>Name name</li>
-				</ul>
-				
-				<img src="spinner.gif" id="spinner">
-			</div>
-			
-			<div id="form">
-				<form id="thing">
-					<input type="text" placeholder="Enter your name" id="name">
-					<input type="submit" id="submit" value="Go!">
-					<div class="clear"></div>
-				</form>
-			</div>
-		</div>
+	    <div id='map3d'></div> 
+	
+	<div id="top">
+		<h1>Milk Truck Kart Demo</h1>
 	</div>
-</body>
+		<div id='win' style="display:none; color:red; position:absolute; top: 50%; left:50%;font-size:40px;">
+		<h1>You Won!</h1>
+		</div>
+		<div id='lose' style="display:none; color:blue; position:absolute; top: 50%; left:50%;font-size:40px;">
+		<h1>You Lost!</h1>
+		</div></body>
+	<div id="controls">
+		<div id="right">To drive: use the buttons, or keyboard arrows (with focus on page).</div>
+		
+		<div id="left"> 
+			<form name='searchform' id='searchform' action='javascript:submitLocation();void(0);'> 
+				<input type=text size=60 id='address' value='(enter a location to go there)'></input> 
+				<input type=submit value='Teleport!'> 
+			</form> 
+			
+			Presets:
+			<input type=button value="Th' Plex" onclick="truck.teleportTo(37.423501,-122.086744,90);"> 
+			<input type=button value="San Francisco" onclick="doGeocode('San Francisco');"> 
+			<input type=button value="Whistler" onclick="truck.teleportTo(50.085734,-122.855824,220);"> 
+			<input type=button value="Pismo" onclick="truck.teleportTo(35.040675,-120.629513,170);"> 
+			<input type=button value="Tokyo" onclick="truck.teleportTo(35.668607,139.822026,180);"> 
+			<input type=button value="Everest" onclick="truck.teleportTo(27.991283,86.924340,70);"> 
+		</div> 
+	</div>
+	</div>
 
 </html>
