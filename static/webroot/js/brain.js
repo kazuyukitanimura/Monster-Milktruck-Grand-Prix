@@ -74,6 +74,8 @@ $(function() {
 				}
 				console.log("You are user number: " + currentNum);
     			getUserPosition(currentNum); 
+                        window.allUserInfo.depart=data.depart;
+                        window.allUserInfo.destination=data.destination;
     			window.raceID = data.raceID;
     			
     			//isControlled = confirm('Want to be controlled? Your username: ' + data.users[currentNum].name);
