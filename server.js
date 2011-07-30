@@ -81,7 +81,7 @@ io.sockets.on('connection', function(socket) {
         users.push(gUserTable[raceObj[i]]);
       }
       for(var i=raceObj.length; i--;){
-        socket.sockets.sockets[raceObj[i]].json.send({raceID: raceID, depart: depart, destination: destination, users: users});
+        socket.sockets.sockets[raceObj[i]].json.emit('startRace', {raceID: raceID, depart: depart, destination: destination, users: users});
       }
       gRaceIDCounter++;
     }
