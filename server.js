@@ -86,6 +86,10 @@ io.sockets.on('connection', function(socket) {
         io.sockets.sockets[raceObj[i]].json.emit('startRace', {raceID: raceID, depart: depart, destination: destination, users: users});
       }
       gRaceArray[++gRaceIDCounter] = [];
+    }else{
+      for(var i=raceObj.length; i--;){
+        io.sockets.sockets[raceObj[i]].json.emit('newClient', {name: data.name});
+      }
     }
   });
   socket.on('location', function(data){
