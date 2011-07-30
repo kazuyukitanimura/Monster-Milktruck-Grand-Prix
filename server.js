@@ -93,14 +93,23 @@ io.sockets.on('connection', function(socket) {
     var latD = data.lat - INIT_DESTINATION.lat;
     var lonD = data.lon - INIT_DESTINATION.lon;
     var distance = latD*latD + lonD*lonD
+    var sid = socket.id;
     if(raceID>=0){
       var raceObj = gRaceArray[raceID];
       for(var i=raceObj.length; i--;){
-        io.sockets.sockets[raceObj[i]].json.emit('control', data);
+        var tosid = raceObj[i];
+        if(sid!==tosid){
+          io.sockets.sockets[tosid].json.emit('control', data);
+        }
       }
       if(distance < 0.01){
         for(var i=raceObj.length; i--;){
-          io.sockets.sockets[raceObj[i]].json.emit('endRace', {raceID:raceID, result:[]});
+          var tosid = raceObj[i];
+          if(sid===tosid){
+            io.sockets.sockets[raceObj[i]].json.emit('endRace', {raceID:raceID, result:"You Win!"});
+          }else{
+            io.sockets.sockets[raceObj[i]].json.emit('endRace', {raceID:raceID, result:"You Win!"});
+          }
         }
       }
     }

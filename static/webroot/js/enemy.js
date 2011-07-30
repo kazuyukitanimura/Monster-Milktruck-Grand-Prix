@@ -64,7 +64,7 @@ Enemy.prototype.finishInit = function(kml) {
   me.shadow.setVisibility(true);
   // ge.getFeatures().appendChild(me.shadow);
 
-  google.earth.addEventListener(ge, "frameend", function() { me.tick(); });
+  //google.earth.addEventListener(ge, "frameend", function() { me.tick(); });
 
   //me.cameraCut();
 
@@ -80,7 +80,7 @@ Enemy.prototype.finishInit = function(kml) {
 
   Socket.on('control', function(data) {
       //console.log('lat:'+data.lat+', lon:'+data.lon+', alt:'+data.alt);
-    //me.model.getLocation().setLatLngAlt(data.lat, data.lon, data.alt);
+    me.model.getLocation().setLatLngAlt(data.lat, data.lon, data.alt);
   });
 }
 //Enemy.prototype.cameraCut = function() {
