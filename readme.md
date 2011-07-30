@@ -1,6 +1,8 @@
-Drive the Monster Milktruck (or Segway) with the Wii Fit Balance Board.
+Race with multiple players as if you are driving in the real world.
+Use arrows to control your car and follow the yellow line to the destination faster than your oppornents.
 
-Video of app in use at SVI Hackathon:
+This is demo developed for the HackDay 20011 held in LinkedIN and based on the Wii Fit Balance Board-driven Monster Milktruck (or Segway) project.
+For the original Wii project, check out the video of app in use at SVI Hackathon:
 http://www.youtube.com/watch?v=Jnsxsn2CZFo
 
 Wii Fit Balance Board -> [Osculator](http://www.osculator.net) -> this (node server.js)
