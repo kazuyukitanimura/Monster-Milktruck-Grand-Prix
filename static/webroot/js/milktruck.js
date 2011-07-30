@@ -117,7 +117,8 @@ Truck.prototype.finishInit = function(kml) {
   me.balloon.setForegroundColor(BALLOON_FG);
   me.balloon.setBackgroundColor(BALLOON_BG);
 
-  me.teleportTo(INIT_LOC.lat, INIT_LOC.lon, INIT_LOC.heading);
+  //me.teleportTo(INIT_LOC.lat, INIT_LOC.lon, INIT_LOC.heading);
+  me.teleportTo(window.allUserInfo.lat, window.allUserInfo.lon, INIT_LOC.heading);
 
   me.lastMillis = (new Date()).getTime();
 

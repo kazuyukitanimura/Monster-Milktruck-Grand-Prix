@@ -1,6 +1,7 @@
 $(function() {
     
     window.Socket = io.connect();
+    window.isControlled = false;
     
     Socket.on('uuid', function(data) {
     	window.allUserInfo.userID = data.userID;
@@ -8,33 +9,33 @@ $(function() {
 	
 	Socket.on('control', function(data) {
 		if (isControlled && data.userID == window.controllingUser) {
-			truck.teleportTo(data.lat, data.lon);
+			//truck.teleportTo(data.lat, data.lon);
 		}
 	});
 	
-	Socket.json.emit('location', {
-		raceID: window.raceID,
-		userID: window.allUserInfo.userID,
-		lat: window.allUserInfo.lat,
-		lon: window.allUserInfo.lon
-	});
+	//Socket.json.emit('location', {
+	//	raceID: window.raceID,
+	//	userID: window.allUserInfo.userID,
+	//	lat: window.allUserInfo.lat,
+	//	lon: window.allUserInfo.lon
+	//});
     
     Socket.on('startRace', function(data) {
     	function getUserPosition(pos){
-    	    allUserInfo.lon = data.depart.lon;
+    	    window.allUserInfo.lon = data.depart.lon;
     	    
     	    switch (pos) {
     	    	case 0:
-    				allUserInfo.lat = data.depart.lat-.0001;
+    				window.allUserInfo.lat = data.depart.lat;
     	    		break;
     	    	case 1:
-    		    	allUserInfo.lat = data.depart.lat-.0001;
+    		    	window.allUserInfo.lat = data.depart.lat-0.001;
     	    		break;
     	    	case 2:
-    		    	allUserInfo.lat = data.depart.lat-.0002;
+    		    	window.allUserInfo.lat = data.depart.lat-0.002;
     	    		break;
     	    	case 3:
-    		    	allUserInfo.lat = data.depart.lat-.0003;
+    		    	window.allUserInfo.lat = data.depart.lat-0.003;
     	    		break;
     	    }
     	}
@@ -53,10 +54,9 @@ $(function() {
     			document.body.innerHTML = html;
     			init();
     			var currentNum;
-				var usersLength = data.users.length - 1;
 				var usersList = '';
 				console.log ('local: ' + window.allUserInfo.userID);
-				for (x = 0; x < data.users.length; x++) {
+				for (var x = 0; x < data.users.length; x++) {
 					console.log ('remote: ' + data.users[x].userID);
 					if(window.allUserInfo.userID == data.users[x].userID) {
 						currentNum = x;
@@ -67,19 +67,19 @@ $(function() {
     			getUserPosition(currentNum); 
     			window.raceID = data.raceID;
     			
-    			var isControlled = confirm('Want to be controlled? Your username: ' + data.users[currentNum].name);
+    			isControlled = confirm('Want to be controlled? Your username: ' + data.users[currentNum].name);
     			
     			if (isControlled) {
     			    window.controllingUser = prompt('Which user would you like to control you? Current users are: ' + usersList);
     			    var matched = false;
-    			    for (i = 0; i < data.users.length; i++) {
+    			    for (var i = 0; i < data.users.length; i++) {
     			    	if (data.users[i].name == window.controllingUser) {
     			    		matched = true;
     			    	}
     			    }
     			    while (window.controllingUser == data.users[currentNum].name || !matched) {
     			    	window.controllingUser = prompt('Which user would you like to control you? Current users are: ' + usersList);
-    			    	for (i = 0; i < data.users.length; i++) {
+    			    	for (var i = 0; i < data.users.length; i++) {
     			    		if (data.users[i].name == window.controllingUser) {
     			    			matched = true;
     			    		}
@@ -89,7 +89,7 @@ $(function() {
     			    document.body.removeEventListener('keyup', keyUpListener, false);
     			}
     			
-    			truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
+    			//truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
     		}
     	};
     	
@@ -105,36 +105,36 @@ $(function() {
     	return keyUp(event);
     };
 
-    Socket.on('control', function(data) {
-        var axisX = data.x;
-        var axisY = data.y;
-        // console.log(axis);
-        
-        if (axisX>=0) {
-          if (axisX < 0.46) {
-            leftButtonDown = true;
-            rightButtonDown = false;
-          } else if (axisX > 0.54) {
-            leftButtonDown = false;
-            rightButtonDown = true;
-          } else {
-            leftButtonDown = false;
-            rightButtonDown = false;
-          }
-        }
-        if (axisY>=0) {
-          if (axisY < 0.48) {
-            gasButtonDown = false;
-            reverseButtonDown = true;
-          } else if (axisY > 0.52) {
-            gasButtonDown = true;
-            reverseButtonDown = false;
-          } else {
-            gasButtonDown = false;
-            reverseButtonDown = false;
-          }
-        }
-    });
+    //Socket.on('control', function(data) {
+    //    var axisX = data.x;
+    //    var axisY = data.y;
+    //    // console.log(axis);
+    //    
+    //    if (axisX>=0) {
+    //      if (axisX < 0.46) {
+    //        leftButtonDown = true;
+    //        rightButtonDown = false;
+    //      } else if (axisX > 0.54) {
+    //        leftButtonDown = false;
+    //        rightButtonDown = true;
+    //      } else {
+    //        leftButtonDown = false;
+    //        rightButtonDown = false;
+    //      }
+    //    }
+    //    if (axisY>=0) {
+    //      if (axisY < 0.48) {
+    //        gasButtonDown = false;
+    //        reverseButtonDown = true;
+    //      } else if (axisY > 0.52) {
+    //        gasButtonDown = true;
+    //        reverseButtonDown = false;
+    //      } else {
+    //        gasButtonDown = false;
+    //        reverseButtonDown = false;
+    //      }
+    //    }
+    //});
     
     // new Hand({id: 'left'});
     // new Hand({id: 'right'});
