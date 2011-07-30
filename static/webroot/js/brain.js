@@ -33,13 +33,13 @@ $(function() {
     				window.allUserInfo.lat = data.depart.lat;
     	    		break;
     	    	case 1:
-    		    	window.allUserInfo.lat = data.depart.lat-0.001;
+    		    	window.allUserInfo.lat = data.depart.lat-0.0001;
     	    		break;
     	    	case 2:
-    		    	window.allUserInfo.lat = data.depart.lat-0.002;
+    		    	window.allUserInfo.lat = data.depart.lat-0.0002;
     	    		break;
     	    	case 3:
-    		    	window.allUserInfo.lat = data.depart.lat-0.003;
+    		    	window.allUserInfo.lat = data.depart.lat-0.0003;
     	    		break;
     	    }
     	}
