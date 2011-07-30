@@ -7,12 +7,12 @@ $(function() {
     	window.allUserInfo.userID = data.userID;
     });
 	
-	Socket.on('control', function(data) {
-		//if (isControlled && data.userID == window.controllingUser) {
-			//truck.teleportTo(data.lat, data.lon);
-                        console.log('lat:'+data.lat+', lon:'+data.lon+', alt:'+data.alt);
-		//}
-	});
+	//Socket.on('control', function(data) {
+	//	//if (isControlled && data.userID == window.controllingUser) {
+	//		//truck.teleportTo(data.lat, data.lon);
+        //                console.log('lat:'+data.lat+', lon:'+data.lon+', alt:'+data.alt);
+	//	//}
+	//});
 	
 	//Socket.json.emit('location', {
 	//	raceID: window.raceID,

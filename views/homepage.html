@@ -17,6 +17,7 @@
 	<!-- <script type="text/javascript" src="/webroot/js/models/hand.js"></script> -->
 	<!-- <script type="text/javascript" src="/webroot/js/views/handview.js"></script> -->
 	<script type="text/javascript" src="/webroot/js/milktruck.js"></script> 
+	<script type="text/javascript" src="/webroot/js/enemy.js"></script> 
 	<script type="text/javascript" src="/webroot/js/brain.js"></script>
 	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
@@ -50,6 +51,7 @@
 	var ge = null;
 	var geocoder;
 	var truck = {};
+	var enemy = {};
 	
 	function el(e) { return document.getElementById(e); }
 	
@@ -74,6 +76,7 @@
 	ge.getOptions().setFlyToSpeed(ge.SPEED_TELEPORT);
 	
 	truck = new Truck();
+	enemy = new Enemy();
 	
 	keyboardFocusHack(ge);
 	}
