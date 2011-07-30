@@ -54,7 +54,7 @@ var io = socketIO.listen(app);
 //  osc_serv.bind(60000, '10.22.35.95')
 //
 //});
-MAXRACEUSER = 1;
+MAXRACEUSER = 4;
 gUserIDCounter = 0;
 gRaceIDCounter = 0;
 gRaceArray = [[]]; // array of array of sid
@@ -89,9 +89,9 @@ io.sockets.on('connection', function(socket) {
     }else{
       var newClients = [];
       for(var i=raceObj.length; i--;){
-        newClients.push(gUserTable[raceObj[i]].name);
-      }
-      for(var i=raceObj.length; i--;){
+          newClients.push(gUserTable[raceObj[i]].name);
+        }
+        for(var i=raceObj.length; i--;){
         io.sockets.sockets[raceObj[i]].json.emit('newClient', {names:newClients});
       }
     }
@@ -110,7 +110,7 @@ io.sockets.on('connection', function(socket) {
           io.sockets.sockets[tosid].json.emit('control', data);
         }
       }
-      if(distance < 0.0001){
+      if(distance < 0.00001){
         for(var i=raceObj.length; i--;){
           var tosid = raceObj[i];
           if(sid===tosid){
