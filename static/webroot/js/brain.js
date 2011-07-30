@@ -7,7 +7,7 @@ $(function() {
     });
     
 	function startRace(data) {
-		var currentNum = getCurrentNum();
+		var currentNum = getCurrentNum(data);
 		getUserPosition(currentNum); 
 		window.raceID = data.raceID;
 		        
@@ -30,7 +30,7 @@ $(function() {
 		    }
 		}
 		
-		function getCurrentNum() {
+		function getCurrentNum(data) {
 			var usersLength = data.users.length - 1;
 		    for (x = 0; x < data.users.length; x++) {
 		        if(allUserInfo.userid == data.users[x].userid){
