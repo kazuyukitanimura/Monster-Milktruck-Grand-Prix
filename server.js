@@ -47,11 +47,40 @@ var io = socketIO.listen(app);
 //  osc_serv.bind(60000, '10.22.35.95')
 //
 //});
-globalIDCounter = 0;
+MAXRACEUSER = 4;
+gUserIDCounter = 0;
+gRaceIDCounter = 0;
+gRaceArray = []; // array of array of sid
+gUserTable = {};
 io.sockets.on('connection', function(socket) {
-  socket.json.emit('uuid', {userID:globalIDCounter++});
-  socket.on('control', function(data){
-    socket.broadcast.json.send(data);
+  socket.json.emit('uuid', {userID:gUserIDCounter++});
+
+  socket.on('join', function(data){
+    var sid = socket.id;
+    gUserTable[sid] = data;
+    var raceObj = gRaceArray[gRaceIDCounter];
+    if(! Array.isArray(raceObj)) {
+      console.err("What!!!");
+      exit();
+    }
+    raceObj.push(sid);
+    gRaceArray[gRaceIDCounter] = raceObj;
+    if(raceObj.length === MAXRACEUSER){
+      var depart = {lat: 37.423191, lon: -122.070787, name"LinkedIn"};
+      var destination = {lat: 37.735189, lon: -122.505498, name"San Francisco Zoo"};
+      var raceID = gRaceIDCounter;
+      var users = [];
+      for(var i=raceObj.length; i--;){
+        users.push(gUserTable[raceObj[i]]);
+      }
+      for(var i=raceObj.length; i--;){
+        socket.sockets.sockets[raceObj[i]].json.send({raceID: raceID, depart: depart, destination: destination, users: users});
+      }
+      gRaceIDCounter++;
+    }
+  });
+  socket.on('location', function(data){
+    socket.broadcast.json.emit('control', data);
   });
 });
 
