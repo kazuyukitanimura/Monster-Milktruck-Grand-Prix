@@ -115,8 +115,8 @@
 		function load() {			
 			var username = document.getElementById('name');
 			var button = document.getElementById('submit');
-			button.addEventListener('click', function(evt) {
-				evt.preventDefault();
+			button.addEventListener('click', function(e) {
+				e.preventDefault();
 				var data = {
 					userID: allUserInfo.userID,
 					name: username.value,
