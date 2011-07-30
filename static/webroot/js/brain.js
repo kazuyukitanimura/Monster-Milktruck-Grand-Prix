@@ -6,40 +6,49 @@ $(function() {
     	window.allUserInfo.id = data.id;
     });
     
-function startRace(data) {
-	var currentNum = getCurrentNum();
-	getUserPosition(currentNum); 
-	window.raceID = data.raceID;
-	        
-	function getUserPosition(pos){
-	    allUserInfo.lon = data.depart.lon;
-	    
-	    switch (pos) {
-	    	case 0:
-				allUserInfo.lat = data.depart.lat-.0001;
-	    		break;
-	    	case 1:
-		    	allUserInfo.lat = data.depart.lat-.0001;
-	    		break;
-	    	case 2:
-		    	allUserInfo.lat = data.depart.lat-.0002;
-	    		break;
-	    	case 3:
-		    	allUserInfo.lat = data.depart.lat-.0003;
-	    		break;
-	    }
+	function startRace(data) {
+		var currentNum = getCurrentNum();
+		getUserPosition(currentNum); 
+		window.raceID = data.raceID;
+		        
+		function getUserPosition(pos){
+		    allUserInfo.lon = data.depart.lon;
+		    
+		    switch (pos) {
+		    	case 0:
+					allUserInfo.lat = data.depart.lat-.0001;
+		    		break;
+		    	case 1:
+			    	allUserInfo.lat = data.depart.lat-.0001;
+		    		break;
+		    	case 2:
+			    	allUserInfo.lat = data.depart.lat-.0002;
+		    		break;
+		    	case 3:
+			    	allUserInfo.lat = data.depart.lat-.0003;
+		    		break;
+		    }
+		}
+		
+		function getCurrentNum() {
+		    for (x = 0; x < data.users.length; x++) {
+		        if(allUserInfo.userid == data.users[x].userid){
+		            return x;
+		        }
+		    }
+		}
+		
+		truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
 	}
 	
-	function getCurrentNum() {
-	    for (x = 0; x < data.users.length; x++) {
-	        if(allUserInfo.userid == data.users[x].userid){
-	            return x;
-	        }
-	    }
-	}
-	
-	truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
-}
+	Socket.on('control', function(data) {
+		Socket.json.emit('location', {
+			raceID: raceID,
+			userID: userid,
+			lat: lat,
+			lon: lon
+		});
+	});
     
     Socket.on('startRace', function(data) {
     	var xhr = new XMLHttpRequest();
