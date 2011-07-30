@@ -8,7 +8,7 @@ $(function() {
 	
 	Socket.on('control', function(data) {
 		if (isControlled && data.userID == window.controllingUser) {
-			truck.teleportTo(data.lat, data.lon);
+			window.truck.teleportTo(data.lat, data.lon);
 		}
 	});
 	
@@ -89,7 +89,7 @@ $(function() {
     			    document.body.removeEventListener('keyup', keyUpListener, false);
     			}
     			
-    			truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
+    			window.truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
     		}
     	};
     	
