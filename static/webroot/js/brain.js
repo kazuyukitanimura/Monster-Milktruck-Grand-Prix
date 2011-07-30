@@ -1,6 +1,11 @@
 $(function() {
     
     window.Socket = io.connect();
+    
+    Socket.on('uuid', function(data) {
+    	window.allUserInfo.id = data.id;
+    	console.log(window.allUserInfo.id);
+    });
 
     Socket.on('message', function(data) {
         var axisX = data.x;
