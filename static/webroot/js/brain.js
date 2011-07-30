@@ -2,6 +2,7 @@ $(function() {
     
     window.Socket = io.connect();
     window.isControlled = false;
+    window.userIDtoIdx = {};
     
     Socket.on('uuid', function(data) {
     	window.allUserInfo.userID = data.userID;
@@ -83,6 +84,7 @@ $(function() {
 						currentNum = x;
 					}
 					usersList += '\n ' + data.users[x].name;
+                                        window.userIDtoIdx[data.users[x].userID] = x;
 				}
 				console.log("You are user number: " + currentNum);
     			getUserPosition(currentNum); 

@@ -15,9 +15,10 @@ var INIT_LOC = {
 
 var PREVENT_START_AIRBORNE = false;
 
-function Enemy(){
+function Enemy(enemyIdx){
     var me = this;
     me.doTick = true;
+    me.enemyIdx = enemyIdx;
     
     window.google.earth.fetchKml(ge,MODEL_URL, function(obj){me.finishInit(obj);});
 }
@@ -80,7 +81,9 @@ Enemy.prototype.finishInit = function(kml) {
 
   Socket.on('control', function(data) {
       //console.log('lat:'+data.lat+', lon:'+data.lon+', alt:'+data.alt);
-    me.model.getLocation().setLatLngAlt(data.lat, data.lon, data.alt);
+    if(window.userIDtoIdx[data.userID]===me.enemyIdx){
+      me.model.getLocation().setLatLngAlt(data.lat, data.lon, data.alt);
+    }
   });
 }
 //Enemy.prototype.cameraCut = function() {
