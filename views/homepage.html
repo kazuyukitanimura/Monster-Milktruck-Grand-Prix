@@ -85,6 +85,29 @@
 	enemy4 = new Enemy();
 	
 	keyboardFocusHack(ge);
+    
+        //create placemark
+        var lineStringPlacemark = ge.createPlacemark('');
+        
+        //create linestring
+        var lineString = ge.createLineString('');
+        lineStringPlacemark.setGeometry(lineString);
+        //lineString.setExtrude(true);
+        lineString.setTessellate(true);
+        lineString.setAltitudeMode(ge.ALTITUDE_RELATIVE_TO_GROUND);
+        
+        //add linestring points
+        lineString.getCoordinates().pushLatLngAlt(window.allUserInfo.depart.lat,window.allUserInfo.depart.lon);
+        lineString.getCoordinates().pushLatLngAlt(window.allUserInfo.arrive.lat,window.allUserInfo.arrive.lon);
+        
+        lineStringPlacemark.setStyleSelector(ge.createStyle(''));
+         var lineStyle = lineStringPlacemark.getStyleSelector().getLineStyle();
+         lineStyle.setWidth(5);
+         lineStyle.getColor().set('9900ffff'); 
+        
+        //add to earth
+        ge.getFeatures().appendChild(lineStringPlacemark);
+    
 	}
 	
 	function failureCallback(err) {
@@ -101,7 +124,7 @@
 	function submitLocation() {
 	doGeocode(el('address').value);
 	}
-	
+    
 	function doGeocode(address) {
 	geocoder.getLatLng(address, function(point) {
 	  if (point) {
