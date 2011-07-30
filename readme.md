@@ -3,6 +3,7 @@ Use arrows to control your car and follow the yellow line to the destination fas
 
 This is demo developed for the LinkedIn Intern HackDay 20011 (7/29-30) and based on the Wii Fit Balance Board-driven Monster Milktruck (or Segway) project.
 The demo is available at http://pictshare.me:8090
+Wait for 4 users to sign up for a race (from LinkedIn to Apple).
 
 For the original Wii project, check out the video of app in use at SVI Hackathon:
 http://www.youtube.com/watch?v=Jnsxsn2CZFo
