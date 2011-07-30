@@ -21,7 +21,12 @@ $(function() {
 	//	lon: window.allUserInfo.lon
 	//});
     Socket.on('endRace',function(data){
-      console.log(data);
+      var result = data.result;
+      if(result==='win'){
+        $('#win').show();
+      }else if(result==='lose'){
+        $('#lose').show();
+      }
     });
     
     Socket.on('startRace', function(data) {

@@ -30,4 +30,10 @@
         </td> 
       </tr> 
     </table> 
+<div id='win' style="display:none; color:red; position:absolute; top: 50%; left:50%;font-size:40px;">
+<h1>You Won!</h1>
+</div>
+<div id='lose' style="display:none; color:blue; position:absolute; top: 50%; left:50%;font-size:40px;">
+<h1>You Lost!</h1>
+</div>
   </center> 
