@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<!-- <script type="text/javascript" src="/webroot/js/models/hand.js"></script> -->
 	<!-- <script type="text/javascript" src="/webroot/js/views/handview.js"></script> -->
+	<script type="text/javascript" src="/webroot/js/milktruck.js"></script> 
 	<script type="text/javascript" src="/webroot/js/brain.js"></script>
 	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
@@ -42,14 +43,13 @@
 	<script type="text/javascript" src="http://earth-api-samples.googlecode.com/svn/trunk/lib/math3d.js"></script> 
 	<script type="text/javascript" src="http://earth-api-samples.googlecode.com/svn/trunk/lib/keyboard-focus-hack.js"></script> 
 	<script type="text/javascript" src="http://earth-api-samples.googlecode.com/svn/trunk/lib/kmldomwalk.js"></script> 
-	<script type="text/javascript" src="/webroot/js/milktruck.js"></script> 
 	<script type="text/javascript"> 
 	google.load("earth", "1");
 	google.load("maps", "2");
 	
 	var ge = null;
 	var geocoder;
-	var truck;
+	var truck = {};
 	
 	function el(e) { return document.getElementById(e); }
 	
