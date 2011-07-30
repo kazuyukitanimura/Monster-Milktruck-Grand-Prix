@@ -67,7 +67,8 @@ $(function() {
     			getUserPosition(currentNum); 
     			window.raceID = data.raceID;
     			
-    			isControlled = confirm('Want to be controlled? Your username: ' + data.users[currentNum].name);
+    			//isControlled = confirm('Want to be controlled? Your username: ' + data.users[currentNum].name);
+                        
     			
     			if (isControlled) {
     			    window.controllingUser = prompt('Which user would you like to control you? Current users are: ' + usersList);
