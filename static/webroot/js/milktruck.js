@@ -156,7 +156,6 @@ function keyDown(event) {
   if (!event) {
     event = window.event;
   }
-  var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
     leftButtonDown = true;
     event.returnValue = false;
@@ -179,7 +178,6 @@ function keyUp(event) {
   if (!event) {
     event = window.event;
   }
-  var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
     leftButtonDown = false;
     event.returnValue = false;
@@ -386,7 +384,7 @@ Truck.prototype.tick = function() {
   lla = V3.cartesianToLatLonAlt(gpos);
   me.model.getLocation().setLatLngAlt(lla[0], lla[1], lla[2]);
   //socket.json.emit('location', {raceID: raceID, userID: userID, lat: lla[0], lon: lla[1] });
-  Socket.json.emit('location', {raceID: window.raceID, userID: window.allUserInfo.userID, lat: lla[0], lon: lla[1] });
+  Socket.json.emit('location', {raceID: window.raceID, userID: window.allUserInfo.userID, lat: lla[0], lon: lla[1], alt: lla[2] });
 
   var newhtr = M33.localOrientationMatrixToHeadingTiltRoll(me.modelFrame);
 

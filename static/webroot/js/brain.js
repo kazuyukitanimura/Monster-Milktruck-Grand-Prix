@@ -8,9 +8,10 @@ $(function() {
     });
 	
 	Socket.on('control', function(data) {
-		if (isControlled && data.userID == window.controllingUser) {
+		//if (isControlled && data.userID == window.controllingUser) {
 			//truck.teleportTo(data.lat, data.lon);
-		}
+                        console.log('lat:'+data.lat+', lon:'+data.lon);
+		//}
 	});
 	
 	//Socket.json.emit('location', {
