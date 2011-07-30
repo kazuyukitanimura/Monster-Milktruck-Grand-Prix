@@ -3,51 +3,8 @@ $(function() {
     window.Socket = io.connect();
     
     Socket.on('uuid', function(data) {
-    	window.allUserInfo.id = data.id;
+    	window.allUserInfo.id = data.userID;
     });
-    
-	function startRace(data) {
-		var currentNum = getCurrentNum(data);
-		getUserPosition(currentNum); 
-		window.raceID = data.raceID;
-		        
-		function getUserPosition(pos){
-		    allUserInfo.lon = data.depart.lon;
-		    
-		    switch (pos) {
-		    	case 0:
-					allUserInfo.lat = data.depart.lat-.0001;
-		    		break;
-		    	case 1:
-			    	allUserInfo.lat = data.depart.lat-.0001;
-		    		break;
-		    	case 2:
-			    	allUserInfo.lat = data.depart.lat-.0002;
-		    		break;
-		    	case 3:
-			    	allUserInfo.lat = data.depart.lat-.0003;
-		    		break;
-		    }
-		}
-		
-		function getCurrentNum(data) {
-			var usersLength = data.users.length - 1;
-		    for (x = 0; x < data.users.length; x++) {
-		        if(allUserInfo.userid == data.users[x].userid){
-		            return x;
-		        }
-		    }
-		    
-		    var isControlled = prompt('Want to be controlled?', '');
-		    if (isControlled) {
-			    window.controllingUser = prompt('Which user would you like to control? 0 through ' + usersLength + ':', '');
-			    document.body.removeEventListener('keydown', keyDownListener, false);
-			    document.body.removeEventListener('keyup', keyUpListener, false);
-			}
-		}
-		
-		truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
-	}
 	
 	Socket.on('control', function(data) {
 		if (isControlled && data.userID == window.controllingUser) {
@@ -63,25 +20,64 @@ $(function() {
 	});
     
     Socket.on('startRace', function(data) {
+    	function getUserPosition(pos){
+    	    allUserInfo.lon = data.depart.lon;
+    	    
+    	    switch (pos) {
+    	    	case 0:
+    				allUserInfo.lat = data.depart.lat-.0001;
+    	    		break;
+    	    	case 1:
+    		    	allUserInfo.lat = data.depart.lat-.0001;
+    	    		break;
+    	    	case 2:
+    		    	allUserInfo.lat = data.depart.lat-.0002;
+    	    		break;
+    	    	case 3:
+    		    	allUserInfo.lat = data.depart.lat-.0003;
+    	    		break;
+    	    }
+    	}
+    	
+    	document.body.addEventListener('keydown', keyDownListener, false);
+    	document.body.addEventListener('keyup', keyUpListener, false);
+    	
+    	document.body.addEventListener('unload', function() {
+    		GUnload();
+    	}, false);
+    	
     	var xhr = new XMLHttpRequest();
     	xhr.onreadystatechange = function() {
     		if (xhr.readyState == 4) {
-    			var data = xhr.responseText;
-    			document.body.innerHTML = data;
+    			var html = xhr.responseText;
+    			document.body.innerHTML = html;
     			init();
-    			startRace(data);
+    			var currentNum;
+				var usersLength = data.users.length - 1;
+				for (x = 0; x < data.users.length; x++) {
+				    if(allUserInfo.id == data.users[x].userid){
+				        currentNum = x;
+				    }
+				}
+    			getUserPosition(currentNum); 
+    			window.raceID = data.raceID;
+    			
+    			var isControlled = confirm('Want to be controlled? You are user ' + window.allUserInfo.id + '.');
+    			if (isControlled) {
+    			    window.controllingUser = prompt('Which user would you like to control you? 0 through ' + usersLength + ':', '');
+    			    while (window.controllingUser == currentNum) {
+    			    	window.controllingUser = prompt('No! 0 through ' + usersLength + ':', '');
+    			    }
+    			    document.body.removeEventListener('keydown', keyDownListener, false);
+    			    document.body.removeEventListener('keyup', keyUpListener, false);
+    			}
+    			
+    			truck.teleportTo(allUserInfo.lat, allUserInfo.lon);
     		}
     	};
     	
 		xhr.open('GET', "index.txt", true); 
 		xhr.send(null); 
-		
-		document.body.addEventListener('keydown', keyDownListener, false);
-		document.body.addEventListener('keyup', keyUpListener, false);
-		
-		document.body.addEventListener('unload', function() {
-			GUnload();
-		}, false);
     });
     
     function keyDownListener(event) {
