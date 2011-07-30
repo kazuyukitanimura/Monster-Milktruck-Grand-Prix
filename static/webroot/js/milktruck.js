@@ -158,19 +158,15 @@ function keyDown(event) {
   var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
     leftButtonDown = true;
-    socket.json.emit('location', {x: 0});
     event.returnValue = false;
   } else if (event.keyCode == 39) {  // Right.
     rightButtonDown = true;
-    socket.json.emit('location', {x: 1});
     event.returnValue = false;
   } else if (event.keyCode == 38) {  // Up.
     gasButtonDown = true;
-    socket.json.emit('location', {y: 1});
     event.returnValue = false;
   } else if (event.keyCode == 40) {  // Down.
     reverseButtonDown = true;
-    socket.json.emit('location', {y: 0});
     event.returnValue = false;
   } else {
     return true;
@@ -185,19 +181,15 @@ function keyUp(event) {
   var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
     leftButtonDown = false;
-    socket.json.emit('location', {x: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 39) {  // Right.
     rightButtonDown = false;
-    socket.json.emit('location', {x: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 38) {  // Up.
     gasButtonDown = false;
-    socket.json.emit('location', {y: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 40) {  // Down.
     reverseButtonDown = false;
-    socket.json.emit('location', {y: 0.5});
     event.returnValue = false;
   }
   return false;
@@ -392,6 +384,8 @@ Truck.prototype.tick = function() {
                 M33.transform(me.localFrame, me.pos));
   lla = V3.cartesianToLatLonAlt(gpos);
   me.model.getLocation().setLatLngAlt(lla[0], lla[1], lla[2]);
+  //socket.json.emit('location', {raceID: raceID, userID: userID, lat: lla[0], lon: lla[1] });
+  socket.json.emit('location', {raceID: 0, userID: allUserInfo.id, lat: lla[0], lon: lla[1] });
 
   var newhtr = M33.localOrientationMatrixToHeadingTiltRoll(me.modelFrame);
 
