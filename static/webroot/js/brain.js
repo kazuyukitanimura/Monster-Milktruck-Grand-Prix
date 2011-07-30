@@ -77,7 +77,7 @@ $(function() {
 		}, false);
     });
 
-    Socket.on('message', function(data) {
+    Socket.on('control', function(data) {
         var axisX = data.x;
         var axisY = data.y;
         // console.log(axis);

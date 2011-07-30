@@ -158,19 +158,19 @@ function keyDown(event) {
   var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
     leftButtonDown = true;
-    socket.json.emit('control', {x: 0});
+    socket.json.emit('location', {x: 0});
     event.returnValue = false;
   } else if (event.keyCode == 39) {  // Right.
     rightButtonDown = true;
-    socket.json.emit('control', {x: 1});
+    socket.json.emit('location', {x: 1});
     event.returnValue = false;
   } else if (event.keyCode == 38) {  // Up.
     gasButtonDown = true;
-    socket.json.emit('control', {y: 1});
+    socket.json.emit('location', {y: 1});
     event.returnValue = false;
   } else if (event.keyCode == 40) {  // Down.
     reverseButtonDown = true;
-    socket.json.emit('control', {y: 0});
+    socket.json.emit('location', {y: 0});
     event.returnValue = false;
   } else {
     return true;
@@ -185,19 +185,19 @@ function keyUp(event) {
   var socket = window.Socket;
   if (event.keyCode == 37) {  // Left.
     leftButtonDown = false;
-    socket.json.emit('control', {x: 0.5});
+    socket.json.emit('location', {x: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 39) {  // Right.
     rightButtonDown = false;
-    socket.json.emit('control', {x: 0.5});
+    socket.json.emit('location', {x: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 38) {  // Up.
     gasButtonDown = false;
-    socket.json.emit('control', {y: 0.5});
+    socket.json.emit('location', {y: 0.5});
     event.returnValue = false;
   } else if (event.keyCode == 40) {  // Down.
     reverseButtonDown = false;
-    socket.json.emit('control', {y: 0.5});
+    socket.json.emit('location', {y: 0.5});
     event.returnValue = false;
   }
   return false;
