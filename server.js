@@ -47,7 +47,9 @@ var io = socketIO.listen(app);
 //  osc_serv.bind(60000, '10.22.35.95')
 //
 //});
+globalIDCounter = 0;
 io.sockets.on('connection', function(socket) {
+  socket.json.emit('uuid', {id:globalIDCounter++});
   socket.on('control', function(data){
     socket.broadcast.json.send(data);
   });
