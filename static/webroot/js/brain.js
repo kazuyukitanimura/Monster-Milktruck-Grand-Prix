@@ -23,9 +23,9 @@ $(function() {
 	//});
     Socket.on('endRace',function(data){
       var result = data.result;
-      if(result===='win'){
+      if(result==='win'){
         $('#win').show();
-      }else if(result===='lose'){
+      }else if(result==='lose'){
         $('#lose').show();
       }
     });
@@ -81,7 +81,7 @@ $(function() {
                                 var xx = 0;
 				for (var x = 0; x < data.users.length; x++) {
 					console.log ('remote: ' + data.users[x].userID);
-					if(window.allUserInfo.userID ==== data.users[x].userID) {
+					if(window.allUserInfo.userID === data.users[x].userID) {
 						currentNum = x;
 					}else{
                                           window.userIDtoIdx[data.users[xx].userID] = xx++;
