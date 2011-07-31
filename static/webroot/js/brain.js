@@ -23,9 +23,9 @@ $(function() {
 	//});
     Socket.on('endRace',function(data){
       var result = data.result;
-      if(result==='win'){
+      if(result===='win'){
         $('#win').show();
-      }else if(result==='lose'){
+      }else if(result===='lose'){
         $('#lose').show();
       }
     });
@@ -71,20 +71,22 @@ $(function() {
     	
     	var xhr = new XMLHttpRequest();
     	xhr.onreadystatechange = function() {
-    		if (xhr.readyState == 4) {
+    		if (xhr.readyState === 4) {
     			var html = xhr.responseText;
     			document.body.innerHTML = html;
     			init();
     			var currentNum;
 				var usersList = '';
 				console.log ('local: ' + window.allUserInfo.userID);
+                                var xx = 0;
 				for (var x = 0; x < data.users.length; x++) {
 					console.log ('remote: ' + data.users[x].userID);
-					if(window.allUserInfo.userID == data.users[x].userID) {
+					if(window.allUserInfo.userID ==== data.users[x].userID) {
 						currentNum = x;
-					}
+					}else{
+                                          window.userIDtoIdx[data.users[xx].userID] = xx++;
+                                        }
 					usersList += '\n ' + data.users[x].name;
-                                        window.userIDtoIdx[data.users[x].userID] = x;
 				}
 				console.log("You are user number: " + currentNum);
     			getUserPosition(currentNum); 
@@ -99,14 +101,14 @@ $(function() {
     			    window.controllingUser = prompt('Which user would you like to control you? Current users are: ' + usersList);
     			    var matched = false;
     			    for (var i = 0; i < data.users.length; i++) {
-    			    	if (data.users[i].name == window.controllingUser) {
+    			    	if (data.users[i].name === window.controllingUser) {
     			    		matched = true;
     			    	}
     			    }
-    			    while (window.controllingUser == data.users[currentNum].name || !matched) {
+    			    while (window.controllingUser === data.users[currentNum].name || !matched) {
     			    	window.controllingUser = prompt('Which user would you like to control you? Current users are: ' + usersList);
     			    	for (var i = 0; i < data.users.length; i++) {
-    			    		if (data.users[i].name == window.controllingUser) {
+    			    		if (data.users[i].name === window.controllingUser) {
     			    			matched = true;
     			    		}
     			    	}
